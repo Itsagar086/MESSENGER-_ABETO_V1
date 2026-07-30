@@ -10,7 +10,11 @@ camera.position.z = 5;
 
 // Create renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NoToneMapping; // Default tone mapping
+renderer.shadowMap.enabled = true;
 
 // Append renderer canvas to the DOM
 const container = document.getElementById('app');
@@ -32,6 +36,7 @@ window.addEventListener('resize', () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
     renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
