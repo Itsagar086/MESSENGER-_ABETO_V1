@@ -4,9 +4,15 @@ import * as THREE from 'three';
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000); // Black background
 
+// Camera configuration constants
+const FOV = 75; // Field of view in degrees (vertical)
+const NEAR = 0.1; // Near clipping plane (objects closer than this are not rendered)
+const FAR = 1000; // Far clipping plane (objects farther than this are not rendered)
+const INITIAL_POSITION = new THREE.Vector3(0, 0, 5); // Starting camera position (looking at origin)
+
 // Create camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 5;
+const camera = new THREE.PerspectiveCamera(FOV, window.innerWidth / window.innerHeight, NEAR, FAR);
+camera.position.copy(INITIAL_POSITION);
 
 // Create renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
